@@ -39,13 +39,15 @@ public class EventoServiceImpl implements EventoService {
         return eventoRepository.findById(id);
     }
 
-    
     @Override
     @Transactional
     public Evento save(Evento evento) {
 
+        validarValoresNumericos(evento);
+
         if (evento.getComuna() == null ||
             evento.getComuna().getId() == null) {
+
             throw new ResponseStatusException(
                 HttpStatus.BAD_REQUEST,
                 "Debes indicar el ID de la comuna"
@@ -75,8 +77,11 @@ public class EventoServiceImpl implements EventoService {
                 "Evento no encontrado con ID: " + id
             ));
 
+        validarValoresNumericos(evento);
+
         if (evento.getComuna() == null ||
             evento.getComuna().getId() == null) {
+
             throw new ResponseStatusException(
                 HttpStatus.BAD_REQUEST,
                 "Debes indicar el ID de la comuna"
@@ -114,4 +119,51 @@ public class EventoServiceImpl implements EventoService {
     public boolean existsById(Long id) {
         return eventoRepository.existsById(id);
     }
+
+    private void validarValoresNumericos(Evento evento) {
+
+        if (evento == null) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Debes ingresar los datos del evento"
+            );
+        }
+
+        if (evento.getPrecio() == null ||
+            evento.getPrecio() < 0) {
+
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El precio no puede ser negativo ni nulo"
+            );
+        }
+
+        if (evento.getAforoMaximo() == null ||
+            evento.getAforoMaximo() <= 0) {
+
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El aforo máximo debe ser mayor que cero"
+            );
+        }
+
+        if (evento.getAforoDisponible() == null ||
+            evento.getAforoDisponible() < 0) {
+
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El aforo disponible no puede ser negativo ni nulo"
+            );
+        }
+
+        if (evento.getAforoDisponible() >
+            evento.getAforoMaximo()) {
+
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "El aforo disponible no puede superar el aforo máximo"
+            );
+        }
+    }
+
 }
