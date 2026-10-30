@@ -11,6 +11,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+
 @Entity
 @Table(name = "eventos")
 public class Evento {
@@ -31,12 +35,18 @@ public class Evento {
     @Column(nullable = false)
     private String recinto;
 
+    @NotNull(message = "El precio es obligatorio")
+    @PositiveOrZero(message = "El precio no puede ser negativo")
     @Column(nullable = false)
     private Integer precio;
 
+    @NotNull(message = "El aforo máximo es obligatorio")
+    @Positive(message = "El aforo máximo debe ser mayor que cero")
     @Column(nullable = false)
     private Integer aforoMaximo;
 
+    @NotNull(message = "El aforo disponible es obligatorio")
+    @PositiveOrZero(message = "El aforo disponible no puede ser negativo")
     @Column(nullable = false)
     private Integer aforoDisponible;
 
