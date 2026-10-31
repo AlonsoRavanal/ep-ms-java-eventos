@@ -349,21 +349,6 @@ Los cambios de las ramas de funcionalidad pueden integrarse mediante **Pull Requ
 
 Repositorio: [AlonsoRavanal/ep-ms-java-eventos](https://github.com/AlonsoRavanal/ep-ms-java-eventos)
 
-## 12. Reproducción de la demostración
-
-Para repetir la verificación del microservicio:
-
-1. Clonar el repositorio y comprobar Java 21.
-2. Preparar la carpeta `data/` y ejecutar `mvnw.cmd spring-boot:run`.
-3. Mostrar `application.properties`, `pom.xml` y la organización en capas.
-4. Crear una región, una comuna y un evento en Postman.
-5. Consultar, actualizar y eliminar registros, mostrando los códigos HTTP.
-6. Probar al menos un caso inválido y mostrar la respuesta `400`.
-7. Revisar los datos mediante la API o la consola H2.
-8. Ejecutar `mvnw.cmd clean package` y mostrar el archivo JAR generado.
-
-Este procedimiento permite comprobar los puntos solicitados en la evaluación: endpoints REST, persistencia relacional, operaciones CRUD, uso de Maven y reproducibilidad del proyecto.
-
 ---
 
-**Nota de desarrollo:** el servicio de eventos expone sus propios endpoints y utiliza su propia base H2. Este repositorio no demuestra por sí mismo una integración automática con los microservicios de órdenes, tickets o usuarios.
+**Proyecto:** EventPass · **Microservicio:** Usuarios · **Asignatura:** Java: Diseño y Construcción de Soluciones Nativas en Nube (JVY0101).
